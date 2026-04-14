@@ -8,10 +8,10 @@ import {
   Alert,
   Share,
   TextInput,
+  Linking,
+  Clipboard,
 } from "react-native";
-import * as Clipboard from "expo-clipboard";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, borderRadius, fontSize } from "../../lib/theme";
@@ -137,8 +137,8 @@ export default function Social() {
     setEditedCaption(tpl.caption);
   };
 
-  const copyToClipboard = async (text: string) => {
-    await Clipboard.setStringAsync(text);
+  const copyToClipboard = (text: string) => {
+    Clipboard.setString(text);
     Alert.alert("Copied!", "Caption copied to clipboard. Paste it into your post.");
   };
 
@@ -156,7 +156,7 @@ export default function Social() {
     );
   };
 
-  const generateDmca = async () => {
+  const generateDmca = () => {
     if (!dmcaSong || !dmcaUrl) {
       Alert.alert("Fill in fields", "Enter the song name and infringing URL.");
       return;
