@@ -52,22 +52,17 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="profile"
+        name="ai"
         options={{
-          title: "Profile",
-          tabBarIcon: ({ color, size }) => <Ionicons name="person" size={size} color={color} />,
+          title: "AI",
+          tabBarIcon: ({ color, size }) => <Ionicons name="sparkles" size={size} color={color} />,
         }}
       />
 
-      {/* Hidden tabs — still accessible by URL but not shown in tab bar */}
-      <Tabs.Screen
-        name="scanner"
-        options={{ href: null }}
-      />
-      <Tabs.Screen
-        name="marketplace"
-        options={{ href: null }}
-      />
+      {/* Hidden — accessible by URL only */}
+      <Tabs.Screen name="scanner"     options={{ href: null }} />
+      <Tabs.Screen name="marketplace" options={{ href: null }} />
+      <Tabs.Screen name="profile"     options={{ href: null }} />
     </Tabs>
   );
 }
