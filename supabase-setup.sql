@@ -33,5 +33,7 @@ create table if not exists public.audit_requests (
   created_at   timestamptz not null default now()
 );
 alter table public.audit_requests enable row level security;
-create policy "Service role full access"
-  on public.audit_requests for all using (auth.role() = 'service_role');
+create policy "Anyone can submit audit request"
+  on public.audit_requests for insert with check (true);
+create policy "Service role can read all"
+  on public.audit_requests for select using (auth.role() = 'service_role');
