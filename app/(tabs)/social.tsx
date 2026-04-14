@@ -6,11 +6,12 @@ import {
   ScrollView,
   TouchableOpacity,
   Alert,
-  Clipboard,
   Share,
   TextInput,
 } from "react-native";
+import * as Clipboard from "expo-clipboard";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import { colors, spacing, borderRadius, fontSize } from "../../lib/theme";
@@ -136,8 +137,8 @@ export default function Social() {
     setEditedCaption(tpl.caption);
   };
 
-  const copyToClipboard = (text: string) => {
-    Clipboard.setString(text);
+  const copyToClipboard = async (text: string) => {
+    await Clipboard.setStringAsync(text);
     Alert.alert("Copied!", "Caption copied to clipboard. Paste it into your post.");
   };
 
@@ -155,7 +156,7 @@ export default function Social() {
     );
   };
 
-  const generateDmca = () => {
+  const generateDmca = async () => {
     if (!dmcaSong || !dmcaUrl) {
       Alert.alert("Fill in fields", "Enter the song name and infringing URL.");
       return;
@@ -349,7 +350,7 @@ Registration: US Copyright Office & ASCAP
                 </View>
                 <TouchableOpacity
                   style={styles.dmcaFileBtn}
-                  onPress={() => Alert.alert("Open Browser", `Navigate to:\n${p.url}`)}
+                  onPress={() => Linking.openURL(`https://${p.url}`)}
                 >
                   <Text style={styles.dmcaFileBtnText}>File</Text>
                   <Ionicons name="open-outline" size={14} color={colors.primary} />
